@@ -1,0 +1,127 @@
+@using BulkyBook.Models
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+
+<div class="card shadow border">
+
+    <div class="card-header bg-primary bg-gradient">
+
+        <h5 class="text-white text-center m-0">
+            Account
+        </h5>
+
+    </div>
+
+
+    <div class="card-body p-2">
+
+
+        <ul class="nav nav-pills flex-column">
+
+
+            <li class="nav-item mb-1">
+
+                <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)"
+                   id="profile"
+                   asp-page="./Index">
+
+                    Profile
+
+                </a>
+
+            </li>
+
+
+
+            <li class="nav-item mb-1">
+
+                <a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)"
+                   id="email"
+                   asp-page="./Email">
+
+                    Email
+
+                </a>
+
+            </li>
+
+
+
+
+            <li class="nav-item mb-1">
+
+                <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)"
+                   id="change-password"
+                   asp-page="./ChangePassword">
+
+                    Password
+
+                </a>
+
+            </li>
+
+
+
+
+            @if (hasExternalLogins)
+            {
+
+                <li class="nav-item mb-1">
+
+                    <a class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)"
+                       id="external-login"
+                       asp-page="./ExternalLogins">
+
+                        External Logins
+
+                    </a>
+
+                </li>
+
+            }
+
+
+
+
+            <li class="nav-item mb-1">
+
+                <a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)"
+                   id="two-factor"
+                   asp-page="./TwoFactorAuthentication">
+
+                    Two Factor
+
+                </a>
+
+            </li>
+
+
+
+
+
+            <li class="nav-item mb-1">
+
+                <a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)"
+                   id="personal-data"
+                   asp-page="./PersonalData">
+
+                    Personal Data
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+
+    </div>
+
+
+</div>

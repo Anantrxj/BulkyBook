@@ -1,0 +1,264 @@
+@page
+@model BulkyBookWeb.Areas.Identity.Pages.Account.RegisterModel
+
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="col-md-10">
+
+            <div class="card shadow border mt-4">
+
+
+                <!-- HEADER -->
+                <div class="card-header bg-primary bg-gradient py-3">
+
+                    <div class="text-center">
+
+                        <h2 class="text-white m-0">
+                            Register
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BODY -->
+                <div class="card-body p-4">
+
+
+                    <form id="registerForm"
+                          asp-route-returnUrl="@Model.ReturnUrl"
+                          method="post">
+
+
+                        <h3 class="border-bottom pb-3 mb-4 text-secondary text-center">
+
+                            Create a new account.
+
+                        </h3>
+
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger">
+                        </div>
+
+
+
+
+                        <div class="row">
+
+
+                            <!-- LEFT SIDE -->
+                            <div class="col-md-6">
+
+
+                                <div class="form-floating mb-3">
+
+                                    <input asp-for="Input.Name"
+                                           class="form-control"
+                                           placeholder="Name" />
+
+                                    <label asp-for="Input.Name">
+                                        Name
+                                    </label>
+
+                                    <span asp-validation-for="Input.Name"
+                                          class="text-danger">
+                                    </span>
+
+                                </div>
+
+
+
+
+                                <div class="form-floating mb-3">
+
+                                    <input asp-for="Input.Email"
+                                           class="form-control"
+                                           placeholder="" />
+
+                                    <label asp-for="Input.Email">
+                                        Email
+                                    </label>
+
+                                </div>
+
+
+
+
+                                <div class="form-floating mb-3">
+
+                                    <input asp-for="Input.Password"
+                                           class="form-control"
+                                           placeholder="Password" />
+
+                                    <label asp-for="Input.Password">
+                                        Password
+                                    </label>
+
+                                </div>
+
+
+
+
+                                <div class="form-floating mb-3">
+
+                                    <input asp-for="Input.ConfirmPassword"
+                                           class="form-control"
+                                           placeholder="Confirm Password" />
+
+                                    <label asp-for="Input.ConfirmPassword">
+                                        Confirm Password
+                                    </label>
+
+                                </div>
+
+
+
+
+                                <div class="form-floating mb-3">
+
+                                    <select asp-for="Input.Role"
+                                            asp-items="@Model.Input.RoleList"
+                                            class="form-select">
+
+                                        <option disabled selected>
+                                            -Select Role-
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+
+                            <!-- RIGHT SIDE -->
+                            <div class="col-md-6">
+
+
+                                <div class="form-floating mb-3">
+
+                                    <input asp-for="Input.StreetAddress"
+                                           class="form-control"
+                                           placeholder="Street Address" />
+
+                                    <label asp-for="Input.StreetAddress">
+                                        Street Address
+                                    </label>
+
+                                </div>
+
+
+
+
+
+                                <div class="form-floating mb-3">
+
+                                    <input asp-for="Input.City"
+                                           class="form-control"
+                                           placeholder="City" />
+
+                                    <label asp-for="Input.City">
+                                        City
+                                    </label>
+
+                                </div>
+
+
+
+
+
+                                <div class="form-floating mb-3">
+
+                                    <input asp-for="Input.State"
+                                           class="form-control"
+                                           placeholder="State" />
+
+                                    <label asp-for="Input.State">
+                                        State
+                                    </label>
+
+                                </div>
+
+
+
+
+
+                                <div class="form-floating mb-3">
+
+                                    <input asp-for="Input.Postalcode"
+                                           class="form-control"
+                                           placeholder="Postal Code" />
+
+                                    <label asp-for="Input.Postalcode">
+                                        Postal Code
+                                    </label>
+
+                                </div>
+
+
+
+
+
+                                <div class="form-floating mb-3">
+
+                                    <input asp-for="Input.PhoneNumber"
+                                           class="form-control"
+                                           placeholder="Phone Number" />
+
+                                    <label asp-for="Input.PhoneNumber">
+                                        Phone Number
+                                    </label>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                        <button id="registerSubmit"
+                                type="submit"
+                                class="w-100 btn btn-primary mt-2">
+
+                            REGISTER
+
+                        </button>
+
+
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}
