@@ -1,4 +1,4 @@
-﻿using BulkyBook.DataAccess.Data;
+using BulkyBook.DataAccess.Data;
 using BulkyBook.DataAccess.Repository;
 using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.Models;
@@ -79,14 +79,15 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
                     string productpath = Path.Combine(
                         wwwRootPath,
-                        @"Images\Product"
+                        "Images",
+                        "Product"
                     );
 
                     if(!String.IsNullOrEmpty(obj.ImageUrl))
                     {
                         // delete the old image
-                        var oldImagePath = Path.Combine(
-                            wwwRootPath, obj.ImageUrl.TrimStart('\\'));
+                        var relativePath = obj.ImageUrl.Replace('\\', '/').TrimStart('/');
+                        var oldImagePath = Path.Combine(wwwRootPath, relativePath);
 
                         if(System.IO.File.Exists(oldImagePath))
                         {
@@ -107,7 +108,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                         file.CopyTo(fileStream);
                     }
 
-                    obj.ImageUrl = @"\Images\Product\" + fileName;
+                    obj.ImageUrl = "/Images/Product/" + fileName;
                 }
 
                 if (obj.Id == 0)
@@ -168,12 +169,15 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Error while deleting" });
             }
 
-            var oldImagePath = Path.Combine(
-                            _hostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
-
-            if(System.IO.File.Exists(oldImagePath))
+            if (!string.IsNullOrEmpty(productToBeDeleted.ImageUrl))
             {
-                System.IO.File.Delete(oldImagePath);
+                var relativePath = productToBeDeleted.ImageUrl.Replace('\\', '/').TrimStart('/');
+                var oldImagePath = Path.Combine(_hostEnvironment.WebRootPath, relativePath);
+
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
             }
 
             _UnitOfWork.Product.Remove(productToBeDeleted);
