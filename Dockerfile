@@ -8,7 +8,6 @@ RUN dotnet restore "BulkyWeb/BulkyBookWeb.csproj"
 
 RUN dotnet publish "BulkyWeb/BulkyBookWeb.csproj" -c Release -o /app/publish
 
-
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
 WORKDIR /app
