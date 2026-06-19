@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/Solution Items/">
-    <File Path="Dockerfile.txt" />
+    <File Path="Dockerfile" />
   </Folder>
   <Project Path="Bulky.DataAccess/BulkyBook.DataAccess.csproj" Id="1f461f66-b404-4de0-a996-04de52261458" />
   <Project Path="Bulky.Models/BulkyBook.Models.csproj" Id="b6d43ba0-1404-4913-8353-14152d8c97b1" />
