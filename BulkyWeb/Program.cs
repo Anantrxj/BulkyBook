@@ -70,12 +70,27 @@ app.Run();
 
 void SeedDatabase()
 {
+    Console.WriteLine("--> Database Migration Starting...");
     using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        if (dbContext.Database.GetPendingMigrations().Any())
+        try
         {
-            dbContext.Database.Migrate();
+            Console.WriteLine("--> Checking for pending migrations...");
+            if (dbContext.Database.GetPendingMigrations().Any())
+            {
+                Console.WriteLine("--> Applying migrations...");
+                dbContext.Database.Migrate();
+                Console.WriteLine("--> Migrations applied successfully!");
+            }
+            else
+            {
+                Console.WriteLine("--> No pending migrations found.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("--> ERROR during migration: " + ex.Message);
         }
     }
 }
