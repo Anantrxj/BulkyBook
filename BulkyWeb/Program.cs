@@ -39,12 +39,12 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 
 var app = builder.Build();
-
+SeedDatabase();
 
 // Configure pipeline
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Customer/Home/Error");
     app.UseHsts();
 }
 
@@ -67,3 +67,15 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 app.Run();
+
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        if (dbContext.Database.GetPendingMigrations().Any())
+        {
+            dbContext.Database.Migrate();
+        }
+    }
+}
